@@ -12,9 +12,9 @@ contract VivoWarrentyNFT is ERC721, ERC721Burnable, Ownable {
     Counters.Counter private _tokenIdCounter;
 
     constructor() ERC721("VivoWarrentyNFT", "VWNFT") {}
-
+    //URL will have metadata of product
     function _baseURI() internal pure override returns (string memory) {
-        return "https://www.vivo.com/w.nft";
+        return "https://www.vivo.com/w.nft/";
     }
 
     function safeMint(address to) public onlyOwner {
