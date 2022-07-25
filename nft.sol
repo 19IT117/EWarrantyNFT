@@ -10,16 +10,22 @@ contract VivoWarrentyNFT is ERC721, ERC721Burnable, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
-
+    mapping (address => bool) authority;
     constructor() ERC721("VivoWarrentyNFT", "VWNFT") {}
     //URL will have metadata of product
     function _baseURI() internal pure override returns (string memory) {
         return "https://www.vivo.com/w.nft/";
     }
 
-    function safeMint(address to) public onlyOwner {
+    function safeMint(address to) public returns(uint256){
+        require(authority[msg.sender], "You aren't authorized contract");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
+        return tokenId;
+    }
+
+    function ChangeAuthority(address contractaddress,bool authorityStatus) public onlyOwner{
+        authority[contractaddress]= authorityStatus;   
     }
 }
