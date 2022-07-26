@@ -4,10 +4,13 @@ pragma solidity ^0.8.4;
 interface IERC165 {
  function supportsInterface(bytes4 interfaceID) external view returns (bool);
 }
+
 interface supportedFunctions{
     function tokenURI(uint tokenID) external view returns(string memory);
+    function safeMint(address to) external returns(uint256);
 }
-interface IERC721 is IERC165,supportedFunctions{
+
+interface updatedisIERC721 is IERC165,supportedFunctions{
     
     event Transfer(address from,address to,uint256 tokenId);
     event Approval(address owner,address approved,uint256 tokenId);
